@@ -1,0 +1,45 @@
+# Azure Identity, Authentication, and Authorization
+
+Azure Entra ID, formerly known as Azure Active Directory (Azure AD), is a cloud-based identity and access management service provided by Microsoft. It is designed to help organizations manage and secure their digital identities and resources. Key features and functions of Azure Entra ID include:
+
+- Identity Management: Manages user identities and ensures secure authentication and authorization.
+- Access Management: Controls access to applications and resources within the organization.
+- Single Sign-On (SSO): Allows users to access multiple applications with one set of credentials.
+- Multi-Factor Authentication (MFA): Enhances security by requiring two or more verification methods.
+- Conditional Access: Provides policies to enforce specific requirements for accessing resources.
+- Self-Service Password Reset: Enables users to reset their passwords without IT assistance.
+- B2B Collaboration: Allows secure collaboration with external partners by granting them access to internal resources.
+- B2C Identity Management: Manages customer identities for applications.
+- Application Management: Integrates with a wide range of applications for streamlined access and management.
+- Azure Entra ID is a critical component for securing and managing access to Microsoft services and other integrated applications, making it an essential tool for enterprises leveraging Microsoft cloud solutions.
+
+## Azure Active Directory
+
+- Microsoft Entra is a product family that includes Azure AD/Microsoft Entra Id
+- Active Directory (AD) is not the same as Azure AD/ Microsoft Entra ID
+- Every Azure account will have an Azure AD/Entra ID service
+- A tenant is a dedicated instance of Azure AD/Entra ID. It represents your organization in Azure
+- A user can only be a member of up to 500 tenants
+- A subscription is a billin entity. All resources can only belong to a single subscription.
+
+https://github.com/bloomikko/AZ-900
+https://myousufali.wordpress.com/wp-content/uploads/2020/09/az-900-cheatsheet.pdf
+
+## External resources
+
+### Learning resources
+
+[Microsoft's learning path](https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/)
+[Undergroundwires' excellent bullet points of AZ-900](https://github.com/undergroundwires/Azure-in-bullet-points/tree/master/AZ-900%20Microsoft%20Azure%20Fundamentals)
+
+### Practice exams
+
+[Microsoft's practice exam](https://learn.microsoft.com/en-us/certifications/exams/az-900/practice/assessment?assessmentId=23&assessment-type=practice)
+[Thomas Mitchell's practice exam](https://thomasmitchell.net/az-900-mock-exam/)
+
+### Question dumps
+
+[Datawolf's question dumps (check the PDF)](https://datawolfs.com/az-900-exam-questions-dumps-answer-free-pdf-download/)
+[Exam Topics' questions](https://www.examtopics.com/exams/microsoft/az-900/view/)
+[IT Exams' questions](https://www.itexams.com/exam/AZ-900)
+[Passnexam's questions](https://www.passnexam.com/microsoft/az-900)
