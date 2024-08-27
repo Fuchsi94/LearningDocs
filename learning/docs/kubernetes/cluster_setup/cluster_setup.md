@@ -6,35 +6,37 @@ This guide provides step-by-step instructions for setting up a Kubernetes cluste
 
 Setting up the infrastructure on GCP is the foundation of your Kubernetes cluster. This involves creating virtual machines (VMs) that will serve as the nodes in your cluster. Terraform, an Infrastructure as Code (IaC) tool, is used to automate the creation and management of these resources, ensuring consistency, repeatability, and ease of modification.
 
-Step 1: Initialize Terraform
+### Step 1: Initialize Terraform
+
 Initialize Terraform to download necessary plugins and prepare your working directory:
 
-bash
-Copy code
+```bash
 terraform init
 terraform plan
 terraform apply -auto-approve
 terraform output > terraform-outputs.txt
 This command sequence initializes Terraform, generates an execution plan, applies the plan to create resources, and then saves the outputs (such as VM IP addresses) to a file for later use.
+```
 
 ## 2. Install Kubernetes Components
 
-Step 1: SSH into Each VM
-SSH into each VM created by Terraform to install necessary components. Use the VM names from terraform-outputs.txt:
+### Step 1: SSH into Each VM
 
-bash
-Copy code
+SSH into each VM created by Terraform to install necessary components. Use the VM names from `terraform-outputs.txt`:
+
+```bash
 gcloud compute ssh --zone "europe-west6-a" "k8s-master" --project "codify-playground-yannick"
 gcloud compute ssh --zone "europe-west6-a" "k8s-worker-1" --project "codify-playground-yannick"
 gcloud compute ssh --zone "europe-west6-a" "k8s-worker-2" --project "codify-playground-yannick"
-Step 2: Install containerd
-We will install containerd, which is the preferred container runtime for Kubernetes.
+```
 
-Load Kernel Modules
+### Step 2: Install `containerd`
+
+We will install `containerd`, which is the preferred container runtime for Kubernetes.
+
 Ensure that necessary kernel modules are loaded:
 
-bash
-Copy code
+```bash
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -42,55 +44,59 @@ EOF
 
 sudo modprobe overlay
 sudo modprobe br_netfilter
-Configure Sysctl Parameters
+```
+
 Configure sysctl parameters to meet Kubernetes networking requirements:
 
-bash
-Copy code
+```bash
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward = 1
 EOF
 
-Apply the sysctl parameters without rebooting:
 
+# Apply the sysctl parameters without rebooting:
 sudo sysctl --system
+```
+
 These steps enable IP forwarding and ensure that bridged network traffic is properly processed by iptables.
 
-Download and Install containerd
-Download the containerd binaries and extract them to /usr/local:
+Download the containerd binaries and extract them to `/usr/local`:
 
-bash
-Copy code
+```bash
 wget https://github.com/containerd/containerd/releases/download/v1.7.11/containerd-1.7.11-linux-amd64.tar.gz
 sudo tar Cxzvf /usr/local containerd-1.7.11-linux-amd64.tar.gz
-Configure and Enable containerd Service
-Generate the default configuration for containerd:
+```
 
-bash
-Copy code
+Generate the default configuration for `containerd`:
+
+```bash
 sudo mkdir /etc/containerd
 containerd config default > config.toml
 sudo cp config.toml /etc/containerd
-Download the systemd service file for containerd, enable the service, and start it:
+```
 
-bash
-Copy code
+Download the systemd service file for `containerd`, enable the service, and start it:
+
+```bash
 wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 sudo cp containerd.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now containerd
+```
+
 Verify that containerd is running:
 
-bash
-Copy code
+```bash
 sudo systemctl status containerd
-Step 3: Install kubeadm, kubelet, and kubectl
+```
+
+### Step 3: Install kubeadm, kubelet, and kubectl
+
 Install the necessary Kubernetes components on all VMs (master and worker nodes):
 
-bash
-Copy code
+```bash
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 sudo mkdir -p -m 755 /etc/apt/keyrings
@@ -100,73 +106,89 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable --now kubelet
-Step 4: Install runc
+```
+
+### Step 4: Install runc
+
 While containerd is the Container Runtime Interface (CRI), runc is the actual runtime used by containerd. Install it as follows:
 
-bash
-Copy code
+```bash
 wget https://github.com/opencontainers/runc/releases/download/v1.1.10/runc.amd64
 sudo install -m 755 runc.amd64 /usr/local/sbin/runc
-Step 5: Install CNI Plugin for containerd
+```
+
+### Step 5: Install CNI Plugin for containerd
+
 containerd requires a CNI plugin to manage network interfaces. Install the CNI plugins:
 
-bash
-Copy code
+```bash
 wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz
 sudo mkdir -p /opt/cni/bin
 sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
-Step 6: Configure containerd with Systemd Cgroup Driver
+```
+
+### Step 6: Configure containerd with Systemd Cgroup Driver
+
 To ensure compatibility with Kubernetes, configure the systemd cgroup driver in the /etc/containerd/config.toml file. Set SystemdCgroup to true:
 
-bash
-Copy code
+```bash
 sudo vim /etc/containerd/config.toml
+```
+
 Locate the following section and update it:
 
-toml
-Copy code
+```toml
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-...
-[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+  ...
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
 SystemdCgroup = true
+```
+
 After updating, restart containerd:
 
-bash
-Copy code
+```bash
 sudo systemctl restart containerd
 sudo systemctl status containerd
-Step 7: Disable Swap
+```
+
+### Step 7: Disable Swap
+
 Kubernetes requires swap to be disabled:
 
-bash
-Copy code
+```bash
 sudo swapoff -a
+```
 
 ## 3. Initialize the Kubernetes Control Plane
 
-Step 1: Initialize the Control Plane
+### Step 1: Initialize the Control Plane
+
 Initialize the Kubernetes control plane on the k8s-master node:
 
-bash
-Copy code
+```bash
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+```
+
 This command sets up the control plane components (API server, scheduler, and controller manager) and configures the network with the specified CIDR range for pods.
 
-Step 2: Configure kubectl for the Master Node
+### Step 2: Configure kubectl for the Master Node
+
 Set up kubectl to manage the cluster from the master node:
 
-bash
-Copy code
+```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-Step 3: Enable Shell Completion for kubectl
+```
+
+### Step 3: Enable Shell Completion for kubectl
+
 For a better command-line experience, enable shell completion for kubectl:
 
-bash
-Copy code
+```bash
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 source <(kubectl completion bash)
+```
 
 ## 4. Join Worker Nodes to the Cluster
 

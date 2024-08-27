@@ -1,8 +1,12 @@
-site_name: My Docs
+site_name: Learning Odyssey
 nav:
   - Home: index.md
-  - Cloud: azure/azure.md
-  - Computer Science: computer_science/solid.md
+  - Cloud:
+      - Azure: azure/azure.md
+      - AWS: aws/aws.md
+      - GCP: gcp/gcp.md
+  - Computer Science:
+      - Software Architecture: computer_science/solid.md
   - Kubernetes:
       - Overview: kubernetes/kubernetes.md
       - Cluster Setup: kubernetes/cluster_setup/cluster_setup.md
