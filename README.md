@@ -2,4 +2,6 @@
 
 This is a collection of Documentations for Learning Purposes
 
-[Azure](./azure/certificationGuides.md)
+Written with mkdocs
+
+https://www.mkdocs.org/getting-started/

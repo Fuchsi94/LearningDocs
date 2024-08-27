@@ -1,0 +1,10 @@
+site_name: My Docs
+nav:
+  - Home: index.md
+  - Cloud: azure/azure.md
+  - Computer Science: computer_science/solid.md
+  - Kubernetes:
+      - Overview: kubernetes/kubernetes.md
+      - CKAD: kubernetes/ckad/ckad.md
+      - CKA: kubernetes/cka/cka.md
+theme: readthedocs
