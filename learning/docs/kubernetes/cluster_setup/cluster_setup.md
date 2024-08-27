@@ -10,7 +10,7 @@ Setting up the infrastructure on GCP is the foundation of your Kubernetes cluste
 
 Initialize Terraform to download necessary plugins and prepare your working directory:
 
-```bash
+```{ .bash, .copy}
 terraform init
 terraform plan
 terraform apply -auto-approve
