@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Kubernetes Cluster Architecture - My Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Kubernetes Cluster Architecture";
+        var mkdocs_page_input_path = "kubernetes/ckad/kubernetesCluster.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> My Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../azure/azure/">Cloud</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../computer_science/solid/">Computer Science</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Kubernetes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../kubernetes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cluster_setup/cluster_setup/">Cluster Setup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ckad/">CKAD</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cka/cka/">CKA</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">My Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Kubernetes Cluster Architecture</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="kubernetes-cluster-architecture">Kubernetes Cluster Architecture</h1>
+<p><img alt="alt text" src="../../Screenshot%202024-08-08%20at%2018.40.19.png" /></p>
+<h2 id="control-plane-components">Control Plane Components</h2>
+<ol>
+<li>
+<p><strong>etcd</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Stores configuration data that can be accessed by each of the nodes in the cluster.</p>
+</li>
+<li>
+<p><strong>kube-apiserver</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: The API server is a component of the Kubernetes control plane that exposes the Kubernetes API.</p>
+</li>
+<li>
+<p><strong>Role</strong>: It serves as the frontend for the Kubernetes control plane. It is the only component that communicates directly with the etcd datastore.</p>
+</li>
+<li>
+<p><strong>kube-scheduler</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: The scheduler is responsible for assigning nodes to the newly created pods.</p>
+</li>
+<li>
+<p><strong>Role</strong>: It watches for newly created pods with no assigned node and selects a node for them to run on based on resource availability.</p>
+</li>
+<li>
+<p><strong>kube-controller-manager</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: This component runs controllers, which are background threads that handle routine tasks.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Controllers include node controller, replication controller, endpoints controller, and others, each handling specific tasks to ensure the cluster's desired state.</p>
+</li>
+<li>
+<p><strong>cloud-controller-manager</strong></p>
+</li>
+<li><strong>Description</strong>: Allows the Kubernetes cluster to interact with the cloud provider's API to manage cloud services.</li>
+<li><strong>Role</strong>: It manages cloud-specific control logic, such as managing load balancers, handling node lifecycle events, and managing storage volumes.</li>
+</ol>
+<h2 id="node-components">Node Components</h2>
+<ol>
+<li>
+<p><strong>kubelet</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: An agent that runs on each node in the cluster.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Ensures that containers are running in a pod. The kubelet takes a set of PodSpecs and ensures that the described containers are running and healthy.</p>
+</li>
+<li>
+<p><strong>kube-proxy</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: A network proxy that runs on each node in your cluster.</p>
+</li>
+<li>
+<p><strong>Role</strong>: It maintains network rules on nodes and enables communication to your pods from network sessions inside or outside of your cluster.</p>
+</li>
+<li>
+<p><strong>Container Runtime</strong></p>
+</li>
+<li><strong>Description</strong>: The software responsible for running containers.</li>
+<li><strong>Role</strong>: Kubernetes supports several container runtimes: Docker, containerd, CRI-O, etc. It is the component that executes and manages containers.</li>
+</ol>
+<h2 id="additional-components">Additional Components</h2>
+<ol>
+<li>
+<p><strong>Pods</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: The smallest and simplest Kubernetes object. A pod represents a set of running containers on your cluster.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Pods can contain one or more containers, and they share the network namespace, meaning they can communicate with each other directly.</p>
+</li>
+<li>
+<p><strong>Namespaces</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: A way to divide cluster resources between multiple users.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Useful for environments with many users spread across different teams or projects, providing a scope for names.</p>
+</li>
+<li>
+<p><strong>ReplicaSets</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: Ensures that a specified number of pod replicas are running at any given time.</p>
+</li>
+<li>
+<p><strong>Role</strong>: It is responsible for maintaining the stable set of pod replicas and can be used directly or by Deployments.</p>
+</li>
+<li>
+<p><strong>Deployments</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: Provides declarative updates to applications.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Manages ReplicaSets and provides rollback capabilities, enabling updates to the state of Pods and ReplicaSets.</p>
+</li>
+<li>
+<p><strong>Services</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: An abstract way to expose an application running on a set of Pods as a network service.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Services allow your applications to receive traffic, with different types like ClusterIP, NodePort, and LoadBalancer.</p>
+</li>
+<li>
+<p><strong>ConfigMaps</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: Provides a way to inject configuration data into Pods.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Decouple configuration artifacts from image content to keep containerized applications portable.</p>
+</li>
+<li>
+<p><strong>Secrets</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: Similar to ConfigMaps but specifically intended to hold sensitive information.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Manages sensitive data such as passwords, OAuth tokens, and ssh keys.</p>
+</li>
+<li>
+<p><strong>Ingress</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: A collection of rules that allow inbound connections to reach the cluster services.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Configures access to cluster services from outside the Kubernetes cluster, typically HTTP/S.</p>
+</li>
+<li>
+<p><strong>Volumes</strong></p>
+</li>
+<li>
+<p><strong>Description</strong>: A directory accessible to containers in a pod.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Kubernetes supports several types of volumes like emptyDir, hostPath, and persistent volumes, each with different characteristics.</p>
+</li>
+<li>
+<p><strong>Persistent Volumes (PV) and Persistent Volume Claims (PVC)</strong></p>
+<ul>
+<li><strong>Description</strong>: PVs are storage resources in the cluster, and PVCs are requests for storage by a user.</li>
+<li><strong>Role</strong>: They provide a way to dynamically or statically provision storage to pods in a cluster.</li>
+</ul>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>Kubernetes architecture is designed to ensure that applications are efficiently deployed, scaled, and managed. Each component plays a critical role in maintaining the cluster's functionality, resilience, and scalability.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

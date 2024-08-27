@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Azure Identity, Authentication, and Authorization - My Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Azure Identity, Authentication, and Authorization";
+        var mkdocs_page_input_path = "azure/az900/identityAuthenticationAuthorization.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> My Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../azure/">Cloud</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../computer_science/solid/">Computer Science</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Kubernetes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/kubernetes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/cluster_setup/cluster_setup/">Cluster Setup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/ckad/ckad/">CKAD</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/cka/cka/">CKA</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">My Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Azure Identity, Authentication, and Authorization</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="azure-identity-authentication-and-authorization">Azure Identity, Authentication, and Authorization</h1>
+<p>Azure Entra ID, formerly known as Azure Active Directory (Azure AD), is a cloud-based identity and access management service provided by Microsoft. It is designed to help organizations manage and secure their digital identities and resources. Key features and functions of Azure Entra ID include:</p>
+<ul>
+<li>Identity Management: Manages user identities and ensures secure authentication and authorization.</li>
+<li>Access Management: Controls access to applications and resources within the organization.</li>
+<li>Single Sign-On (SSO): Allows users to access multiple applications with one set of credentials.</li>
+<li>Multi-Factor Authentication (MFA): Enhances security by requiring two or more verification methods.</li>
+<li>Conditional Access: Provides policies to enforce specific requirements for accessing resources.</li>
+<li>Self-Service Password Reset: Enables users to reset their passwords without IT assistance.</li>
+<li>B2B Collaboration: Allows secure collaboration with external partners by granting them access to internal resources.</li>
+<li>B2C Identity Management: Manages customer identities for applications.</li>
+<li>Application Management: Integrates with a wide range of applications for streamlined access and management.</li>
+<li>Azure Entra ID is a critical component for securing and managing access to Microsoft services and other integrated applications, making it an essential tool for enterprises leveraging Microsoft cloud solutions.</li>
+</ul>
+<h2 id="azure-active-directory">Azure Active Directory</h2>
+<ul>
+<li>Microsoft Entra is a product family that includes Azure AD/Microsoft Entra Id</li>
+<li>Active Directory (AD) is not the same as Azure AD/ Microsoft Entra ID</li>
+<li>Every Azure account will have an Azure AD/Entra ID service</li>
+<li>A tenant is a dedicated instance of Azure AD/Entra ID. It represents your organization in Azure</li>
+<li>A user can only be a member of up to 500 tenants</li>
+<li>A subscription is a billin entity. All resources can only belong to a single subscription.</li>
+<li>Azure AD/Entra ID is the identity, authorization, and management service buildt in to Azure.</li>
+</ul>
+<h2 id="zero-trust-concepts">Zero Trust Concepts</h2>
+<p>All users assumed untrustworthy unless proven otherwise</p>
+<ul>
+<li>Trusted by identity</li>
+<li>Regardless of location (trusted/untrusted networks)</li>
+<li>Least priviledge access - just enough permissions to perform the job</li>
+<li>Simplified, centralized mamagement</li>
+</ul>
+<p>Zero Trust = No presumed trust, but idemtities can be validated. No trusted locations.</p>
+<h2 id="multi-factor-authenticatin">Multi-Factor Authenticatin</h2>
+<ul>
+<li>Multi-factor authentication provides layered security for user identity.</li>
+<li>It requires at least two components of:</li>
+<li>Something you know</li>
+<li>Someting you have</li>
+<li>Something you are</li>
+<li>MFA is a recommended security feature by Microsoft for all Microsoft identities.</li>
+</ul>
+<h2 id="conditional-access">Conditional Access</h2>
+<ul>
+<li>Conditional Access is a feature that provides an <strong>additional layer of security</strong> to your environments and identities.</li>
+<li>Conditional Access rules are essentially <strong>if/then statements</strong> that permit or deny access depending on whether the rules are met.</li>
+<li>Multi-factor authentication os pften <strong>impelmented with Conditional Access</strong> as further security.</li>
+<li>Microsoft recommends the use of MFA and Conditional Access</li>
+</ul>
+<h2 id="passwordless-authentication">Passwordless Authentication</h2>
+<p>Increase convenience while staying secure
+Remove password from login and replace with:</p>
+<ul>
+<li>Something you have (phone/key fob)</li>
+<li>Something you know/are (on device)</li>
+<li>Fingerprint/Face unlock</li>
+</ul>
+<h2 id="external-guest-access">External Guest Access</h2>
+<ul>
+<li>External guest access enables <strong>security outside of your organizational boundaries</strong>.</li>
+<li>Provides <strong>visibility of external guest activity</strong> within your organizational IT borders.</li>
+<li>Business-to-business (B2B) access provides a federated <strong>level of trust for tenants</strong>.</li>
+</ul>
+<h2 id="azure-active-directory-domain-services">Azure Active Directory Domain Services</h2>
+<ul>
+<li>Azure Active Directory Domain Services (Azure AD DS) <strong>provide legacy AD</strong> features inside of Azure.</li>
+<li>Azure AD DS is a <strong>managed service</strong> inside of Azure. There is no maintenance if infrastructure required for the user.</li>
+<li>Integrates with Entra ID/Azure AD.</li>
+<li>Helpful when <strong>migrating or integrating legacy applications</strong> that do not support modern protocols.</li>
+</ul>
+<h2 id="managing-access-to-resources-with-role-based-access-control-rbac">Managing Access to Resources with Role-Based Access Control (RBAC)</h2>
+<ul>
+<li>Control access (to resources and services) based on role (assigned to the user, device, application, or service).</li>
+<li>Least priviledgeL only the permission necessary</li>
+<li>Role segregation: separate duties and responsibilities; avoid combining roles that grant conflicting permissions or excessive access</li>
+<li>Review, audit, and document: check, double check, and write it down</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

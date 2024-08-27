@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Cluster Setup - My Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Cluster Setup";
+        var mkdocs_page_input_path = "kubernetes/cluster_setup/cluster_setup.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> My Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../azure/azure/">Cloud</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../computer_science/solid/">Computer Science</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Kubernetes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../kubernetes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Cluster Setup</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-setup-gcp-infrastructure">1. Setup GCP Infrastructure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-install-kubernetes-components">2. Install Kubernetes Components</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-initialize-the-kubernetes-control-plane">3. Initialize the Kubernetes Control Plane</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-join-worker-nodes-to-the-cluster">4. Join Worker Nodes to the Cluster</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-deploy-a-pod-network">5. Deploy a Pod Network</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-verify-the-cluster">6. Verify the Cluster</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-deploy-a-test-application">7. Deploy a Test Application</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ckad/ckad/">CKAD</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cka/cka/">CKA</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">My Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Kubernetes</li>
+      <li class="breadcrumb-item active">Cluster Setup</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setting-up-a-self-managed-kubernetes-cluster-on-gcp-with-gce">Setting Up a Self-Managed Kubernetes Cluster on GCP with GCE</h1>
+<p>This guide provides step-by-step instructions for setting up a Kubernetes cluster on Google Cloud Platform (GCP) using Google Compute Engine (GCE). The cluster consists of one master node and two worker nodes. This setup is ideal for learning Kubernetes, testing, and small-scale deployments.</p>
+<h2 id="1-setup-gcp-infrastructure">1. Setup GCP Infrastructure</h2>
+<p>Setting up the infrastructure on GCP is the foundation of your Kubernetes cluster. This involves creating virtual machines (VMs) that will serve as the nodes in your cluster. Terraform, an Infrastructure as Code (IaC) tool, is used to automate the creation and management of these resources, ensuring consistency, repeatability, and ease of modification.</p>
+<p>Step 1: Initialize Terraform
+Initialize Terraform to download necessary plugins and prepare your working directory:</p>
+<p>bash
+Copy code
+terraform init
+terraform plan
+terraform apply -auto-approve
+terraform output &gt; terraform-outputs.txt
+This command sequence initializes Terraform, generates an execution plan, applies the plan to create resources, and then saves the outputs (such as VM IP addresses) to a file for later use.</p>
+<h2 id="2-install-kubernetes-components">2. Install Kubernetes Components</h2>
+<p>Step 1: SSH into Each VM
+SSH into each VM created by Terraform to install necessary components. Use the VM names from terraform-outputs.txt:</p>
+<p>bash
+Copy code
+gcloud compute ssh --zone "europe-west6-a" "k8s-master" --project "codify-playground-yannick"
+gcloud compute ssh --zone "europe-west6-a" "k8s-worker-1" --project "codify-playground-yannick"
+gcloud compute ssh --zone "europe-west6-a" "k8s-worker-2" --project "codify-playground-yannick"
+Step 2: Install containerd
+We will install containerd, which is the preferred container runtime for Kubernetes.</p>
+<p>Load Kernel Modules
+Ensure that necessary kernel modules are loaded:</p>
+<p>bash
+Copy code
+cat &lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF</p>
+<p>sudo modprobe overlay
+sudo modprobe br_netfilter
+Configure Sysctl Parameters
+Configure sysctl parameters to meet Kubernetes networking requirements:</p>
+<p>bash
+Copy code
+cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward = 1
+EOF</p>
+<p>Apply the sysctl parameters without rebooting:</p>
+<p>sudo sysctl --system
+These steps enable IP forwarding and ensure that bridged network traffic is properly processed by iptables.</p>
+<p>Download and Install containerd
+Download the containerd binaries and extract them to /usr/local:</p>
+<p>bash
+Copy code
+wget https://github.com/containerd/containerd/releases/download/v1.7.11/containerd-1.7.11-linux-amd64.tar.gz
+sudo tar Cxzvf /usr/local containerd-1.7.11-linux-amd64.tar.gz
+Configure and Enable containerd Service
+Generate the default configuration for containerd:</p>
+<p>bash
+Copy code
+sudo mkdir /etc/containerd
+containerd config default &gt; config.toml
+sudo cp config.toml /etc/containerd
+Download the systemd service file for containerd, enable the service, and start it:</p>
+<p>bash
+Copy code
+wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+sudo cp containerd.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now containerd
+Verify that containerd is running:</p>
+<p>bash
+Copy code
+sudo systemctl status containerd
+Step 3: Install kubeadm, kubelet, and kubectl
+Install the necessary Kubernetes components on all VMs (master and worker nodes):</p>
+<p>bash
+Copy code
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+sudo mkdir -p -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+sudo systemctl enable --now kubelet
+Step 4: Install runc
+While containerd is the Container Runtime Interface (CRI), runc is the actual runtime used by containerd. Install it as follows:</p>
+<p>bash
+Copy code
+wget https://github.com/opencontainers/runc/releases/download/v1.1.10/runc.amd64
+sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+Step 5: Install CNI Plugin for containerd
+containerd requires a CNI plugin to manage network interfaces. Install the CNI plugins:</p>
+<p>bash
+Copy code
+wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz
+sudo mkdir -p /opt/cni/bin
+sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
+Step 6: Configure containerd with Systemd Cgroup Driver
+To ensure compatibility with Kubernetes, configure the systemd cgroup driver in the /etc/containerd/config.toml file. Set SystemdCgroup to true:</p>
+<p>bash
+Copy code
+sudo vim /etc/containerd/config.toml
+Locate the following section and update it:</p>
+<p>toml
+Copy code
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+...
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+SystemdCgroup = true
+After updating, restart containerd:</p>
+<p>bash
+Copy code
+sudo systemctl restart containerd
+sudo systemctl status containerd
+Step 7: Disable Swap
+Kubernetes requires swap to be disabled:</p>
+<p>bash
+Copy code
+sudo swapoff -a</p>
+<h2 id="3-initialize-the-kubernetes-control-plane">3. Initialize the Kubernetes Control Plane</h2>
+<p>Step 1: Initialize the Control Plane
+Initialize the Kubernetes control plane on the k8s-master node:</p>
+<p>bash
+Copy code
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+This command sets up the control plane components (API server, scheduler, and controller manager) and configures the network with the specified CIDR range for pods.</p>
+<p>Step 2: Configure kubectl for the Master Node
+Set up kubectl to manage the cluster from the master node:</p>
+<p>bash
+Copy code
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+Step 3: Enable Shell Completion for kubectl
+For a better command-line experience, enable shell completion for kubectl:</p>
+<p>bash
+Copy code
+echo 'source &lt;(kubectl completion bash)' &gt;&gt;~/.bashrc
+source &lt;(kubectl completion bash)</p>
+<h2 id="4-join-worker-nodes-to-the-cluster">4. Join Worker Nodes to the Cluster</h2>
+<p>Step 1: Retrieve the Join Command
+After initializing the control plane, retrieve the kubeadm join command to add worker nodes to the cluster:</p>
+<p>bash
+Copy code
+kubeadm token create --print-join-command
+Step 2: Join Worker Nodes
+SSH into each worker node (k8s-worker-1 and k8s-worker-2) and run the kubeadm join command:</p>
+<p>bash
+Copy code
+sudo kubeadm join <MASTER_IP>:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<HASH>
+Replace <MASTER_IP>, <TOKEN>, and <HASH> with the actual values from the kubeadm join command.</p>
+<h2 id="5-deploy-a-pod-network">5. Deploy a Pod Network</h2>
+<p>Step 1: Install a Pod Network Add-On
+To enable communication between pods across different nodes, install a pod network add-on.</p>
+<p>Option 1: Flannel
+bash
+Copy code
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+Wait a few moments for the network to be deployed across all nodes.</p>
+<p>Option 2: Calico
+Install the Tigera Operator:</p>
+<p>bash
+Copy code
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+Download the default YAML spec for Calico:</p>
+<p>bash
+Copy code
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+Edit the spec to reflect the correct pod network CIDR:</p>
+<p>bash
+Copy code
+vim custom-resources.yaml
+Apply the configuration:</p>
+<p>bash
+Copy code
+kubectl apply -f custom-resources.yaml</p>
+<h2 id="6-verify-the-cluster">6. Verify the Cluster</h2>
+<p>Step 1: Check Node Status
+Run the following command on the k8s-master to verify that all nodes have successfully joined the cluster and are in a Ready state:</p>
+<p>bash
+Copy code
+kubectl get nodes
+You should see all nodes (k8s-master, k8s-worker-1, k8s-worker-2) listed as Ready.</p>
+<h2 id="7-deploy-a-test-application">7. Deploy a Test Application</h2>
+<p>To test that your Kubernetes cluster is functioning properly, you can deploy a simple application:</p>
+<p>bash
+Copy code
+kubectl create deployment nginx --image=nginx
+Verify that the deployment is running:</p>
+<p>bash
+Copy code
+kubectl get pods
+Expose the deployment as a service:</p>
+<p>bash
+Copy code
+kubectl expose deployment nginx --port=80 --type=NodePort
+Check the service:</p>
+<p>bash
+Copy code
+kubectl get svc
+Access the application using the external IP of any worker node and the NodePort assigned to the service.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../kubernetes/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../ckad/ckad/" class="btn btn-neutral float-right" title="CKAD">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../kubernetes/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../ckad/ckad/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

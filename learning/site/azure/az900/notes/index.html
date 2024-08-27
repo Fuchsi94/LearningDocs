@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Microsoft Azure Fundamentals (AZ-900) - My Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Microsoft Azure Fundamentals (AZ-900)";
+        var mkdocs_page_input_path = "azure/az900/notes.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> My Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../azure/">Cloud</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../computer_science/solid/">Computer Science</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Kubernetes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/kubernetes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/cluster_setup/cluster_setup/">Cluster Setup</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/ckad/ckad/">CKAD</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../kubernetes/cka/cka/">CKA</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">My Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Microsoft Azure Fundamentals (AZ-900)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="microsoft-azure-fundamentals-az-900">Microsoft Azure Fundamentals (AZ-900)</h1>
+<h2 id="storage-and-data-management">Storage and Data Management</h2>
+<ul>
+<li><strong>Azure Blob Storage</strong>: Object storage solution optimized for massive amounts of unstructured data.</li>
+<li><strong>Azure Files</strong>: Serverless cloud file sharing system, accessible via SMB, NFS, or Azure Files REST API.</li>
+<li><strong>Azure File Sync</strong>: Centralizes file shares in Azure Files.</li>
+<li><strong>Azure Data Box</strong>: Physical migration service for transferring data via a Microsoft-provided physical device.</li>
+<li><strong>Azure Storage Explorer</strong>: GUI-based app for managing files and blobs in Azure Storage Account.</li>
+<li><strong>Table Storage</strong>: Non-relational structured data storage providing a key/attribute store with a schemaless design.</li>
+<li><strong>Queue Storage</strong>: Storage for a large number of messages.</li>
+<li><strong>Geo-Redundant Storage (GRS)</strong>: Replicates data in two regions in a locally redundant storage (LRS) manner.</li>
+<li><strong>Geo-Zone-Redundant Storage (GZRS)</strong>: Replicates data across three availability zones in the primary region and in a second region.</li>
+<li><strong>Locally Redundant Storage (LRS)</strong>: Replicates data three times within a single data center in the primary region.</li>
+<li><strong>Zone-Redundant Storage (ZRS)</strong>: Replicates Azure Storage data across three Azure availability zones in the primary region.</li>
+</ul>
+<h2 id="identity-and-security">Identity and Security</h2>
+<ul>
+<li><strong>Azure Active Directory (Azure AD)</strong>: Cloud-based identity management with features like single sign-on (SSO), multi-factor authentication (MFA), and conditional access.</li>
+<li><strong>Azure Active Directory Domain Services</strong>: Provides managed domain services.</li>
+<li><strong>Azure Advanced Threat Protection (ATP)</strong>: Detects and investigates security incidents across networks.</li>
+<li><strong>Azure Security Center</strong>: Monitors security configuration and health of workloads.</li>
+<li><strong>Azure Sentinel</strong>: SIEM tool for responding to threats.</li>
+<li><strong>Azure Key Vault</strong>: Manages secrets.</li>
+<li><strong>Azure Information Protection (AIP)</strong>: Controls security properties of data, like classification.</li>
+<li><strong>Microsoft Defender for Cloud</strong>: Provides cloud security posture management and threat protection.</li>
+<li><strong>Compliance Manager</strong>: Tool to assess compliance requirements.</li>
+</ul>
+<h2 id="compute-and-networking">Compute and Networking</h2>
+<ul>
+<li><strong>Azure Virtual Machines (VMs)</strong>: Virtual machines running on Azure.</li>
+<li><strong>Azure Virtual Network (vNet)</strong>: Enables private network in Azure, allowing virtual machines to securely communicate.</li>
+<li><strong>Azure VPN Gateway</strong>: Sends encrypted traffic between Azure virtual network and on-premises location.</li>
+<li><strong>Azure Bastion</strong>: Provides remote access to virtual machines via a browser and Azure portal.</li>
+<li><strong>Azure Load Balancer</strong>: Distributes incoming network traffic evenly.</li>
+<li><strong>Azure ExpressRoute</strong>: Connects on-premises networks to Microsoft cloud via a connectivity provider.</li>
+<li><strong>Azure Container Instances</strong>: Runs applications in containers without managing virtual machines.</li>
+<li><strong>Azure Kubernetes Service (AKS)</strong>: Deploys and scales containers.</li>
+<li><strong>Availability Set</strong>: Ensures maximum availability by logically grouping virtual machines.</li>
+<li><strong>Availability Zone</strong>: Provides fault isolation within an Azure region.</li>
+<li><strong>Virtual Machine Scale Set</strong>: Group of identical, load-balanced virtual machines.</li>
+<li><strong>Internal Load Balancer</strong>: Balances traffic inside a virtual network.</li>
+<li><strong>Public Load Balancer</strong>: Provides outbound connections for virtual machines inside a virtual network.</li>
+</ul>
+<h2 id="application-services-and-development">Application Services and Development</h2>
+<ul>
+<li><strong>Azure App Service</strong>: HTTP-based service for hosting web applications, REST APIs, and mobile backends.</li>
+<li><strong>Azure Functions</strong>: Event-driven, serverless compute service.</li>
+<li><strong>Azure DevOps</strong>: Set of collaborative development tools built for the cloud.</li>
+<li><strong>Azure Pipelines</strong>: Tool for continuous building, testing, and deploying.</li>
+<li><strong>Azure Repos</strong>: Git repositories for source control.</li>
+<li><strong>Azure Resource Manager (ARM) Template</strong>: Defines the infrastructure and configuration for a project.</li>
+<li><strong>Azure DevTest Labs</strong>: Provides development and test environments with reusable templates and artifacts.</li>
+<li><strong>Azure Application Insights</strong>: Monitors running applications, detects performance anomalies, and provides analytics tools.</li>
+</ul>
+<h2 id="monitoring-and-management">Monitoring and Management</h2>
+<ul>
+<li><strong>Azure Monitor</strong>: Collects, analyzes, and responds to telemetry from cloud and on-premises environments. Supports autoscaling.</li>
+<li><strong>Azure Log Analytics</strong>: Tool for writing log queries on data gathered by Azure Monitor.</li>
+<li><strong>Azure Advisor</strong>: Recommends optimizations for high availability, security, performance, operational excellence, and cost.</li>
+<li><strong>Azure Migrate</strong>: Helps migrate from an on-premises environment to the cloud.</li>
+<li><strong>Azure Service Health</strong>: Alerts for Azure service incidents and planned maintenance.</li>
+<li><strong>Azure Cost Management Tool</strong>: Checks Azure resource costs, creates alerts based on resource spend, and automates management of resources.</li>
+<li><strong>Total Cost of Ownership (TCO) Calculator</strong>: Calculates cost savings of operating a solution in Azure compared to on-premises.</li>
+</ul>
+<h2 id="specialized-services">Specialized Services</h2>
+<ul>
+<li><strong>Azure Arc</strong>: Provides a consistent multi-cloud and on-premises management platform.</li>
+<li><strong>Azure Batch</strong>: Large-scale job scheduling and compute management.</li>
+<li><strong>Azure Blueprints</strong>: Defines a repeatable set of Azure resources adhering to organizational standards.</li>
+<li><strong>Azure CycleCloud</strong>: Manages high-performance computing (HPC) environments.</li>
+<li><strong>Azure Sphere</strong>: Internet of Things (IoT) device platform.</li>
+<li><strong>Azure VMware Solution</strong>: Runs VMware workloads in Azure with seamless integration.</li>
+<li><strong>Azure Virtual Desktop</strong>: Cloud-hosted version of Windows.</li>
+</ul>
+<h2 id="general-concepts">General Concepts</h2>
+<ul>
+<li><strong>Infrastructure as a Service (IaaS)</strong>: Cloud provider maintains hardware, network connectivity, and physical security.</li>
+<li><strong>Platform as a Service (PaaS)</strong>: Cloud provider maintains infrastructure and middleware, allowing focus on application development.</li>
+<li><strong>Software as a Service (SaaS)</strong>: Cloud provider delivers fully functional applications over the internet.</li>
+<li><strong>Elasticity</strong>: Automatic increase or decrease of resources based on demand.</li>
+<li><strong>Scalability</strong>: Ability to increase or decrease resources.</li>
+<li><strong>Vertical Scaling</strong>: Increasing or decreasing resources (e.g., CPU, RAM) of a single instance.</li>
+<li><strong>Horizontal Scaling</strong>: Adding more instances (e.g., additional VMs or containers).</li>
+<li><strong>Resiliency</strong>: Ability of a system to recover from failures and continue to function.</li>
+</ul>
+<h2 id="networking-and-connectivity">Networking and Connectivity</h2>
+<ul>
+<li><strong>Network Security Group</strong>: Filters network traffic between Azure resources in an Azure virtual network.</li>
+<li><strong>Service Endpoint</strong>: Exposes and connects Azure services to a virtual network.</li>
+<li><strong>Local Network Gateway</strong>: Represents the on-premises location for routing purposes.</li>
+<li><strong>Peering</strong>: Linking virtual networks together.</li>
+<li><strong>Application Security Group</strong>: Configures application’s network security as a group of virtual machines.</li>
+<li><strong>Gateway Subnet</strong>: IP address range of a virtual network where resources and services operate.</li>
+</ul>
+<h2 id="miscellaneous">Miscellaneous</h2>
+<ul>
+<li><strong>Fabric Controller</strong>: Special software running in a server connected to the orchestrator.</li>
+<li><strong>Orchestrator</strong>: Manages everything in Azure, responding to user requests and forwarding them to the fabric controller.</li>
+<li><strong>Cloud Solution Provider (CSP)</strong>: Microsoft Partner organization offering Azure services.</li>
+<li><strong>Microsoft Managed Desktop</strong>: Subscription-based desktop-as-a-service (DaaS) cloud platform.</li>
+<li><strong>Microsoft Service Trust Portal</strong>: Portal with various resources about Microsoft security, privacy, and compliance practices.</li>
+<li><strong>Sovereign Region</strong>: Region isolated from the main instance of Azure.</li>
+<li><strong>Management Group</strong>: Grouping of multiple subscriptions.</li>
+<li><strong>Subscription</strong>: Isolated area where Azure resources are created and managed.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
