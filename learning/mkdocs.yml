@@ -5,6 +5,7 @@ nav:
   - Computer Science: computer_science/solid.md
   - Kubernetes:
       - Overview: kubernetes/kubernetes.md
+      - Cluster Setup: kubernetes/cluster_setup/cluster_setup.md
       - CKAD: kubernetes/ckad/ckad.md
       - CKA: kubernetes/cka/cka.md
 theme: readthedocs
