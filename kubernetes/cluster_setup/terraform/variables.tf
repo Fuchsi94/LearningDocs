@@ -7,19 +7,19 @@ variable "project_id" {
 # GCP region
 variable "region" {
   description = "The GCP region where the Kubernetes cluster resources will be created."
-  default     = "europe-west6	" # Default region; change as needed
+  default     = "europe-west6" # Default region; change as needed
 }
 
 # GCP zone
 variable "zone" {
   description = "The GCP zone within the selected region where the Kubernetes cluster resources will be created."
-  default     = "europe-west6-a	" # Default zone; change as needed
+  default     = "europe-west6-a" # Default zone; change as needed
 }
 
 # Path to the service account key file
 variable "service_account_key" {
   description = "Path to the service account key file with permissions to manage GCP resources."
-  default     = "./codify-playground-yannick-7c8dffc5e21a.json" # Provide the correct path to your service account key
+  default     = "/Users/yannickfuchs/Documents/Work/GCPKeys/codify-playground-yannick-943c5944edd5.json" # Provide the correct path to your service account key
 }
 
 # CIDR range for the first subnet

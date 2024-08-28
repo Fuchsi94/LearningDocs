@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../kubernetes/">
+        <link rel="prev" href="../../overview/">
       
       
         <link rel="next" href="../../ckad/ckad/">
@@ -416,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/" class="md-nav__link">
+      <a href="../../overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -947,12 +947,12 @@
 <p>Setting up the infrastructure on GCP is the foundation of your Kubernetes cluster. This involves creating virtual machines (VMs) that will serve as the nodes in your cluster. Terraform, an Infrastructure as Code (IaC) tool, is used to automate the creation and management of these resources, ensuring consistency, repeatability, and ease of modification.</p>
 <h3 id="step-1-initialize-terraform">Step 1: Initialize Terraform</h3>
 <p>Initialize Terraform to download necessary plugins and prepare your working directory:</p>
-<div class="language-text copy highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>terraform init
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>terraform plan
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>terraform apply -auto-approve
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>terraform output &gt; terraform-outputs.txt
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>This command sequence initializes Terraform, generates an execution plan, applies the plan to create resources, and then saves the outputs (such as VM IP addresses) to a file for later use.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>terraform<span class="w"> </span>init
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>terraform<span class="w"> </span>plan
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>terraform<span class="w"> </span>apply<span class="w"> </span>-auto-approve
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>terraform<span class="w"> </span>output<span class="w"> </span>&gt;<span class="w"> </span>terraform-outputs.txt
 </span></code></pre></div>
+<p>This command sequence initializes Terraform, generates an execution plan, applies the plan to create resources, and then saves the outputs (such as VM IP addresses) to a file for later use.</p>
 <h2 id="2-install-kubernetes-components">2. Install Kubernetes Components</h2>
 <h3 id="step-1-ssh-into-each-vm">Step 1: SSH into Each VM</h3>
 <p>SSH into each VM created by Terraform to install necessary components. Use the VM names from <code>terraform-outputs.txt</code>:</p>
@@ -1062,65 +1062,53 @@
 <h2 id="4-join-worker-nodes-to-the-cluster">4. Join Worker Nodes to the Cluster</h2>
 <p>Step 1: Retrieve the Join Command
 After initializing the control plane, retrieve the kubeadm join command to add worker nodes to the cluster:</p>
-<p>bash
-Copy code
-kubeadm token create --print-join-command
-Step 2: Join Worker Nodes
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>kubeadm<span class="w"> </span>token<span class="w"> </span>create<span class="w"> </span>--print-join-command
+</span></code></pre></div>
+<p>Step 2: Join Worker Nodes
 SSH into each worker node (k8s-worker-1 and k8s-worker-2) and run the kubeadm join command:</p>
-<p>bash
-Copy code
-sudo kubeadm join <MASTER_IP>:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<HASH>
-Replace <MASTER_IP>, <TOKEN>, and <HASH> with the actual values from the kubeadm join command.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>join<span class="w"> </span>&lt;MASTER_IP&gt;:6443<span class="w"> </span>--token<span class="w"> </span>&lt;TOKEN&gt;<span class="w"> </span>--discovery-token-ca-cert-hash<span class="w"> </span>sha256:&lt;HASH&gt;
+</span></code></pre></div>
+<p>Replace <MASTER_IP>, <TOKEN>, and <HASH> with the actual values from the kubeadm join command.</p>
 <h2 id="5-deploy-a-pod-network">5. Deploy a Pod Network</h2>
 <p>Step 1: Install a Pod Network Add-On
 To enable communication between pods across different nodes, install a pod network add-on.</p>
-<p>Option 1: Flannel
-bash
-Copy code
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-Wait a few moments for the network to be deployed across all nodes.</p>
+<p>Option 1: Flannel</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+</span></code></pre></div>
+<p>Wait a few moments for the network to be deployed across all nodes.</p>
 <p>Option 2: Calico
 Install the Tigera Operator:</p>
-<p>bash
-Copy code
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
-Download the default YAML spec for Calico:</p>
-<p>bash
-Copy code
-wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
-Edit the spec to reflect the correct pod network CIDR:</p>
-<p>bash
-Copy code
-vim custom-resources.yaml
-Apply the configuration:</p>
-<p>bash
-Copy code
-kubectl apply -f custom-resources.yaml</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+</span></code></pre></div>
+<p>Download the default YAML spec for Calico:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>wget<span class="w"> </span>https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+</span></code></pre></div>
+<p>Edit the spec to reflect the correct pod network CIDR:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vim<span class="w"> </span>custom-resources.yaml
+</span></code></pre></div>
+<p>Apply the configuration:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>custom-resources.yaml
+</span></code></pre></div>
 <h2 id="6-verify-the-cluster">6. Verify the Cluster</h2>
 <p>Step 1: Check Node Status
 Run the following command on the k8s-master to verify that all nodes have successfully joined the cluster and are in a Ready state:</p>
-<p>bash
-Copy code
-kubectl get nodes
-You should see all nodes (k8s-master, k8s-worker-1, k8s-worker-2) listed as Ready.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+</span></code></pre></div>
+<p>You should see all nodes (k8s-master, k8s-worker-1, k8s-worker-2) listed as Ready.</p>
 <h2 id="7-deploy-a-test-application">7. Deploy a Test Application</h2>
 <p>To test that your Kubernetes cluster is functioning properly, you can deploy a simple application:</p>
-<p>bash
-Copy code
-kubectl create deployment nginx --image=nginx
-Verify that the deployment is running:</p>
-<p>bash
-Copy code
-kubectl get pods
-Expose the deployment as a service:</p>
-<p>bash
-Copy code
-kubectl expose deployment nginx --port=80 --type=NodePort
-Check the service:</p>
-<p>bash
-Copy code
-kubectl get svc
-Access the application using the external IP of any worker node and the NodePort assigned to the service.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--image<span class="o">=</span>nginx
+</span></code></pre></div>
+<p>Verify that the deployment is running:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods
+</span></code></pre></div>
+<p>Expose the deployment as a service:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>expose<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--type<span class="o">=</span>NodePort
+</span></code></pre></div>
+<p>Check the service:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc
+</span></code></pre></div>
+<p>Access the application using the external IP of any worker node and the NodePort assigned to the service.</p>
 
 
 

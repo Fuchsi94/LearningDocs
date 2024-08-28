@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../../computer_science/solid/">
+      
+      
+        <link rel="next" href="../cluster_setup/cluster_setup/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -56,6 +60,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-overview" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -367,17 +376,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -391,7 +402,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Kubernetes
@@ -402,10 +413,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../kubernetes/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -414,6 +445,146 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-kubernetes-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Kubernetes Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#container-pods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container &amp; Pods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodes-clusters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nodes &amp; Clusters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-plane-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control Plane Components:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Node Components:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reasons-to-use-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasons to Use Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#master-node-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      Master Node (Control Plane):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Nodes:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Objects:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -506,6 +677,136 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-kubernetes-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Kubernetes Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#container-pods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container &amp; Pods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodes-clusters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nodes &amp; Clusters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-plane-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control Plane Components:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Node Components:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reasons-to-use-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasons to Use Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#master-node-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      Master Node (Control Plane):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Nodes:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Objects:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -520,58 +821,66 @@
                   
 
 
-  <h1>Overview</h1>
-
-<p>What is Kubernetes?
-Kubernetes, often abbreviated as K8s, is an open-source platform designed to automate deploying, scaling, and operating containerized applications. Originally developed by Google, it is now maintained by the Cloud Native Computing Foundation (CNCF). Kubernetes provides a framework to run distributed systems resiliently, managing the lifecycle of containers across a cluster of machines.</p>
-<p>How Kubernetes Works
-Kubernetes orchestrates containers across multiple hosts, providing a unified interface for managing them. It abstracts the underlying infrastructure, allowing developers and operators to focus on application logic and policies rather than the specifics of the environment. Here's a simplified breakdown of how it works:</p>
-<p>Containers and Pods:</p>
-<p>Container: A lightweight, portable, and self-sufficient software package that includes the application code and all its dependencies.
-Pod: The smallest deployable unit in Kubernetes, which can consist of one or more containers. Containers in the same Pod share the same network namespace and can communicate with each other easily.
-Nodes and Clusters:</p>
-<p>Node: A worker machine in Kubernetes, which can be either a physical or virtual machine. Each Node runs at least one container runtime (like Docker) and the necessary Kubernetes components.
-Cluster: A set of Nodes that Kubernetes manages. The cluster is the environment where your applications run.
-Control Plane:</p>
-<p>API Server: The core of Kubernetes' control plane, it exposes the Kubernetes API and is the entry point for all administrative tasks.
-Scheduler: Watches for new Pods with no assigned Node and assigns them to a Node based on resource requirements and policies.
-Controller Manager: A daemon that runs various controllers to handle routine tasks like scaling, rolling updates, and health checks.
-etcd: A key-value store that Kubernetes uses to store all cluster data. It acts as the brain of Kubernetes, keeping track of the state of the cluster.
-Kubelet:</p>
-<p>An agent that runs on each Node. It ensures that containers are running in a Pod and communicates with the Kubernetes API server.
-Kube-Proxy:</p>
-<p>A network proxy that runs on each Node, managing networking rules for Pods and providing service discovery and load balancing.
-Container Runtime:</p>
-<p>The software responsible for running the containers. While Docker is a common runtime, Kubernetes supports other runtimes such as containerd and CRI-O.
-Reasons to Use Kubernetes
-Scalability: Automatically scale your applications up and down based on demand.
-Portability: Run applications in a consistent environment across different environments like on-premises, public, or private cloud.
-Resilience: Kubernetes automatically replaces or reschedules containers when they fail, maintaining the desired state of your applications.
-Automated Rollouts and Rollbacks: Safely roll out changes to your application or configuration and roll back in case of failure.
-Efficient Resource Utilization: Kubernetes packs containers efficiently onto your Nodes, optimizing resource use.
-Self-Healing: Automatically restarts containers that fail, replaces and reschedules them, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they're ready to serve.
-Kubernetes Architecture Overview
-Here's a high-level overview of the Kubernetes architecture:</p>
-<p>Master Node (Control Plane):</p>
-<p>API Server: Handles all RESTful requests to manage the cluster (e.g., deployments, scaling, etc.).
-Scheduler: Assigns workloads to Nodes based on resource availability.
-Controller Manager: Manages controllers, which enforce the desired state of the cluster.
-etcd: Stores all data needed to manage the cluster.
-Worker Nodes:</p>
-<p>Kubelet: Communicates with the API Server and manages the containers running on the Node.
-Kube-Proxy: Handles networking for Pods running on the Node.
-Container Runtime: Pulls and runs container images.
-Objects:</p>
-<p>Pods: The basic deployable unit in Kubernetes, which can run one or more containers.
-Services: Abstracts the networking in Kubernetes, providing a stable IP address and DNS name for a set of Pods.
-Deployments: Provides declarative updates to Pods and ReplicaSets (which ensure a specified number of pod replicas are running at any given time).
-ConfigMaps/Secrets: Manage configuration data separately from container images.
-Networking:</p>
+<h1 id="kubernetes-overview">Kubernetes Overview</h1>
+<p>Kubernetes, often abbreviated as K8s, is an open-source platform designed to automate deploying, scaling, and operating containerized applications. Originally developed by Google, it is now maintained by the Cloud Native Computing Foundation (CNCF). Kubernetes provides a framework to run distributed systems resiliently, managing the lifecycle of containers across a cluster of machines.</p>
+<h2 id="how-kubernetes-works">How Kubernetes Works</h2>
+<p>Kubernetes orchestrates containers across multiple hosts, providing a unified interface for managing them. It abstracts the underlying infrastructure, allowing developers and operators to focus on application logic and policies rather than the specifics of the environment. Here's a simplified breakdown of how it works:</p>
+<h2 id="kubernetes-components">Kubernetes Components</h2>
+<h3 id="container-pods">Container &amp; Pods</h3>
+<ul>
+<li>Container: A lightweight, portable, and self-sufficient software package that includes the application code and all its dependencies.</li>
+<li>Pod: The smallest deployable unit in Kubernetes, which can consist of one or more containers. Containers in the same Pod share the same network namespace and can communicate with each other easily.</li>
+</ul>
+<h3 id="nodes-clusters">Nodes &amp; Clusters</h3>
+<ul>
+<li>Node: A worker machine in Kubernetes, which can be either a physical or virtual machine. Each Node runs at least one container runtime (like Docker) and the necessary Kubernetes components.</li>
+<li>Cluster: A set of Nodes that Kubernetes manages. The cluster is the environment where your applications run.</li>
+</ul>
+<h3 id="control-plane-components">Control Plane Components:</h3>
+<ul>
+<li>API Server: The core of Kubernetes' control plane, it exposes the Kubernetes API and is the entry point for all administrative tasks.</li>
+<li>Scheduler: Watches for new Pods with no assigned Node and assigns them to a Node based on resource requirements and policies.</li>
+<li>Controller Manager: A daemon that runs various controllers to handle routine tasks like scaling, rolling updates, and health checks.</li>
+<li>etcd: A key-value store that Kubernetes uses to store all cluster data. It acts as the brain of Kubernetes, keeping track of the state of the cluster.</li>
+</ul>
+<h3 id="node-components">Node Components:</h3>
+<ul>
+<li>kubelet: An agent that runs on each Node. It ensures that containers are running in a Pod and communicates with the Kubernetes API server.</li>
+<li>Kube-Proxy: A network proxy that runs on each Node, managing networking rules for Pods and providing service discovery and load balancing.</li>
+<li>Container Runtime: The software responsible for running the containers. While Docker is a common runtime, Kubernetes supports other runtimes such as containerd and CRI-O.
+  Reasons to Use Kubernetes</li>
+</ul>
+<h3 id="reasons-to-use-kubernetes">Reasons to Use Kubernetes</h3>
+<ul>
+<li>Scalability: Automatically scale your applications up and down based on demand.</li>
+<li>Portability: Run applications in a consistent environment across different environments like on-premises, public, or private cloud.</li>
+<li>Resilience: Kubernetes automatically replaces or reschedules containers when they fail, maintaining the desired state of your applications.</li>
+<li>Automated Rollouts and Rollbacks: Safely roll out changes to your application or configuration and roll back in case of failure.</li>
+<li>Efficient Resource Utilization: Kubernetes packs containers efficiently onto your Nodes, optimizing resource use.</li>
+<li>Self-Healing: Automatically restarts containers that fail, replaces and reschedules them, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they're ready to serve.</li>
+</ul>
+<h2 id="kubernetes-architecture-overview">Kubernetes Architecture Overview</h2>
+<p>Kubernetes follows a master-worker architecture:</p>
+<h3 id="master-node-control-plane">Master Node (Control Plane):</h3>
+<ul>
+<li>Manages the cluster and coordinates activities like scheduling, scaling, and updates.</li>
+<li>Key components include the API Server, Scheduler, Controller Manager, and etcd.</li>
+</ul>
+<h3 id="worker-nodes">Worker Nodes:</h3>
+<ul>
+<li>Run applications in Pods, manage container runtime, and facilitate networking.</li>
+<li>Key components include the Kubelet, Kube-Proxy, and the Container Runtime.</li>
+</ul>
+<h3 id="kubernetes-objects">Kubernetes Objects:</h3>
+<ul>
+<li>Pods: The basic deployable unit in Kubernetes, which can run one or more containers.</li>
+<li>Services: Abstracts the networking in Kubernetes, providing a stable IP address and DNS name for a set of Pods.</li>
+<li>Deployments: Provides declarative updates to Pods and ReplicaSets (which ensure a specified number of pod replicas are running at any given time).</li>
+<li>ConfigMaps/Secrets: Manage configuration data separately from container images.</li>
+</ul>
+<h3 id="networking">Networking:</h3>
 <p>Kubernetes abstracts away the complexities of networking. Pods can communicate with each other across Nodes, and Services provide a unified interface for accessing Pods.
-Conclusion
-Kubernetes is a powerful orchestration tool that helps you manage containerized applications at scale. It automates many of the manual processes involved in deploying and scaling applications, providing a resilient, portable, and flexible environment for running modern, cloud-native applications. Its architecture, based on a master-worker model, ensures that applications run efficiently and reliably across different environments.</p>
-<p><a href="">Certified Kubernetes Application Developer</a>
-<a href="">Certified Kubernetes Administrator</a></p>
+Conclusion</p>
 
 
 
