@@ -10,13 +10,14 @@ Setting up the infrastructure on GCP is the foundation of your Kubernetes cluste
 
 Initialize Terraform to download necessary plugins and prepare your working directory:
 
-```{ .bash, .copy}
+```bash
 terraform init
 terraform plan
 terraform apply -auto-approve
 terraform output > terraform-outputs.txt
-This command sequence initializes Terraform, generates an execution plan, applies the plan to create resources, and then saves the outputs (such as VM IP addresses) to a file for later use.
 ```
+
+This command sequence initializes Terraform, generates an execution plan, applies the plan to create resources, and then saves the outputs (such as VM IP addresses) to a file for later use.
 
 ## 2. Install Kubernetes Components
 
@@ -195,15 +196,17 @@ source <(kubectl completion bash)
 Step 1: Retrieve the Join Command
 After initializing the control plane, retrieve the kubeadm join command to add worker nodes to the cluster:
 
-bash
-Copy code
+```bash
 kubeadm token create --print-join-command
+```
+
 Step 2: Join Worker Nodes
 SSH into each worker node (k8s-worker-1 and k8s-worker-2) and run the kubeadm join command:
 
-bash
-Copy code
+```bash
 sudo kubeadm join <MASTER_IP>:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<HASH>
+```
+
 Replace <MASTER_IP>, <TOKEN>, and <HASH> with the actual values from the kubeadm join command.
 
 ## 5. Deploy a Pod Network
@@ -212,63 +215,73 @@ Step 1: Install a Pod Network Add-On
 To enable communication between pods across different nodes, install a pod network add-on.
 
 Option 1: Flannel
-bash
-Copy code
+
+```bash
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
+
 Wait a few moments for the network to be deployed across all nodes.
 
 Option 2: Calico
 Install the Tigera Operator:
 
-bash
-Copy code
+```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+```
+
 Download the default YAML spec for Calico:
 
-bash
-Copy code
+```bash
 wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+```
+
 Edit the spec to reflect the correct pod network CIDR:
 
-bash
-Copy code
+```bash
 vim custom-resources.yaml
+```
+
 Apply the configuration:
 
-bash
-Copy code
+```bash
 kubectl apply -f custom-resources.yaml
+```
 
 ## 6. Verify the Cluster
 
 Step 1: Check Node Status
 Run the following command on the k8s-master to verify that all nodes have successfully joined the cluster and are in a Ready state:
 
-bash
-Copy code
+```bash
 kubectl get nodes
+```
+
 You should see all nodes (k8s-master, k8s-worker-1, k8s-worker-2) listed as Ready.
 
 ## 7. Deploy a Test Application
 
 To test that your Kubernetes cluster is functioning properly, you can deploy a simple application:
 
-bash
-Copy code
+```bash
 kubectl create deployment nginx --image=nginx
+```
+
 Verify that the deployment is running:
 
-bash
-Copy code
+```bash
 kubectl get pods
+```
+
 Expose the deployment as a service:
 
-bash
-Copy code
+```bash
 kubectl expose deployment nginx --port=80 --type=NodePort
+```
+
 Check the service:
 
-bash
-Copy code
+```bash
 kubectl get svc
+```
+
 Access the application using the external IP of any worker node and the NodePort assigned to the service.

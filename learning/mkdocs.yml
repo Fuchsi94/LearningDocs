@@ -8,7 +8,7 @@ nav:
   - Computer Science:
       - Software Architecture: computer_science/solid.md
   - Kubernetes:
-      - Overview: kubernetes/kubernetes.md
+      - Overview: kubernetes/overview.md
       - Cluster Setup: kubernetes/cluster_setup/cluster_setup.md
       - CKAD: kubernetes/ckad/ckad.md
       - CKA: kubernetes/cka/cka.md
