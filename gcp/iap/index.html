@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#identity-aware-proxy-iap-in-google-cloud" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -361,6 +366,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Identity Aware Proxy
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -371,6 +389,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#additional-ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Ressources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1001,6 +1047,70 @@
   
   
   
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming/java/abstracts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abstracts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../programming/unit_testing/unit_testing_with_java/" class="md-nav__link">
         
@@ -1040,6 +1150,25 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#additional-ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Ressources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1054,9 +1183,80 @@
                   
 
 
-  <h1>Identity Aware Proxy</h1>
-
-
+<h1 id="identity-aware-proxy-iap-in-google-cloud">Identity-Aware Proxy (IAP) in Google Cloud</h1>
+<ul>
+<li>Use identity and context to guard access to your applications and VMs.</li>
+<li>Control access to your cloud-based and on-premises applications and VMs running on Google Cloud</li>
+<li>Verify user identity and use context to determine if a user should be granted access</li>
+<li>Work from untrusted networks without the use of a VPN</li>
+<li>Implement a zero-trust access model</li>
+</ul>
+<h2 id="additional-ressources">Additional Ressources</h2>
+<p><a href="https://cloud.google.com/security/products/iap?hl=en">Google IAP</a>
+<a href="https://cloud.google.com/iap/docs/concepts-overview#app-engine">identity Aware Proxy Overview</a></p>
+<p>Identity-Aware Proxy (IAP) is a service provided by Google Cloud Platform (GCP) that controls access to web applications and cloud resources running on GCP. It helps secure your application by verifying user identity and context of the request to determine if a user should be granted access. IAP acts as a gatekeeper that sits in front of your application, checking authentication and authorization before allowing traffic to pass through.</p>
+<p>Key Features of Identity-Aware Proxy
+Centralized Access Control: IAP allows you to manage access to applications centrally using Google Cloud IAM (Identity and Access Management). You can define who can access your application and under what conditions.</p>
+<p>Authentication and Authorization: IAP integrates with Google accounts and other identity providers to authenticate users. It checks the user's identity and then enforces policies that you define using IAM roles.</p>
+<p>Granular Access Control: You can apply access controls at a granular level, specifying who can access specific URLs or endpoints within your application.</p>
+<p>Context-Aware Access: IAP supports context-aware access, which allows you to set policies based on attributes like user location, device security status, and more. This enhances security by allowing access only when certain conditions are met.</p>
+<p>Audit Logging: IAP provides audit logging, which helps you track who accessed your resources, when they accessed them, and from where. This is crucial for security monitoring and compliance.</p>
+<p>How Identity-Aware Proxy Works
+IAP acts as an intermediary between users and your application, sitting between the client and the backend service. Here's how it works:</p>
+<p>User Requests Access: When a user attempts to access your application, the request first goes to IAP instead of directly to your backend service.</p>
+<p>Authentication: IAP checks if the user is authenticated. If the user is not logged in, IAP redirects them to a login page for authentication.</p>
+<p>Authorization: Once the user is authenticated, IAP checks if the user is authorized to access the requested resource based on IAM policies.</p>
+<p>Grant or Deny Access: If the user is authenticated and authorized, IAP forwards the request to your application. If not, it denies access and returns an error message.</p>
+<p>Secure Access: All traffic is encrypted using HTTPS, and access is controlled by IAM policies, ensuring secure and compliant access to your applications.</p>
+<p>Use Cases for Identity-Aware Proxy
+Secure Access to Internal Applications: Protect internal web applications by requiring authentication and authorization via IAP, eliminating the need for a VPN.
+Restrict Access Based on User and Context: Set fine-grained access controls based on user identity, device security posture, and network location.
+Compliance and Security: Use IAP to enforce security policies, log access events, and meet compliance requirements.
+Simplify Access Management: Centralize access management with IAM and apply consistent access policies across applications.
+How to Use Identity-Aware Proxy in Google Cloud
+To use Identity-Aware Proxy, follow these steps:</p>
+<ol>
+<li>Enable IAP for Your Project
+   First, enable the IAP API for your Google Cloud project:</li>
+</ol>
+<p>Go to the Google Cloud Console.
+Select your project.
+Go to the APIs &amp; Services &gt; Library.
+Search for "Identity-Aware Proxy" and enable the API. 2. Configure IAP for Your Application
+IAP can be configured for various backend services like Compute Engine, App Engine, Cloud Run, and GKE. Here, we’ll cover configuring IAP for a Compute Engine instance:</p>
+<p>Set Up a Compute Engine Instance: Ensure you have a running Compute Engine instance that you want to protect with IAP.</p>
+<p>Configure OAuth Consent Screen: Set up an OAuth consent screen if you haven’t already. This is required for IAP to use OAuth 2.0 to authenticate users.</p>
+<p>Go to the API &amp; Services &gt; OAuth consent screen in the Google Cloud Console.
+Set up the consent screen by providing necessary information like application name, support email, and adding authorized domains.
+Save your changes.
+Create OAuth Credentials: Create OAuth 2.0 credentials that IAP will use to authenticate users.</p>
+<p>Go to APIs &amp; Services &gt; Credentials.
+Click Create Credentials &gt; OAuth 2.0 Client IDs.
+Configure the OAuth consent screen and application type as “Web application.”
+Add the authorized redirect URIs for your application (usually something like https://iap.googleapis.com/v1/oauth2callback).
+Enable IAP for Your Compute Engine Instance:</p>
+<p>Go to Security &gt; Identity-Aware Proxy in the Google Cloud Console.
+Select your project and click on the Compute Engine tab.
+Find your instance and click Enable IAP.
+Follow the prompts to enable IAP for your instance. 3. Set Up IAM Policies
+You need to set up IAM policies to define who can access your application through IAP:</p>
+<p>Go to IAM &amp; Admin &gt; IAM in the Google Cloud Console.
+Click Add to add a new member.
+Enter the user’s email address or Google group.
+Assign roles that allow access to IAP-secured resources, such as "IAP-secured Web App User." 4. Testing IAP Configuration
+Once configured, you should test that IAP is correctly securing your application:</p>
+<p>Try accessing your application’s URL.
+You should be redirected to the OAuth login page if you’re not already authenticated.
+After logging in, you should only be granted access if your user account has the correct IAM permissions. 5. Monitor and Audit Access
+IAP provides audit logging for all access attempts:</p>
+<p>Go to Logging &gt; Logs Explorer in the Google Cloud Console.
+Filter the logs for identity-aware-proxy to view access logs.
+Review logs to monitor access attempts and ensure compliance.
+Best Practices for Using Identity-Aware Proxy
+Use Least Privilege: Grant users the minimal set of permissions they need to access resources.
+Regularly Audit Access: Use audit logs to regularly review who is accessing your applications and from where.
+Combine with Context-Aware Access: Use context-aware access policies to further secure your applications based on user location, device security, and other factors.
+Keep OAuth Configurations Updated: Regularly review and update your OAuth consent screen and credentials to ensure they meet your security requirements.</p>
 
 
 
